@@ -5,7 +5,7 @@ Created on Fri Jul 28 12:52:40 2023
 @author: shrey
 """
 
-import tensorflow
+import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras.models import load_model
 import numpy as np
@@ -14,11 +14,27 @@ import io
 from PIL import Image, ImageOps
 import streamlit as st
 from pathlib import Path
+import os
 
 
 st.title("Fashion-MNIST Image Predictor")
-file_path = Path(r"C:\Users\shrey\Downloads\Fashion-MNIST\fashion_mnist_cnn.h5")
-model = load_model(file_path)
+current_directory = os.path.dirname(os.path.realpath(__file__))
+file_path = os.path.join(current_directory, "fashion_mnist_cnn.h5")
+
+
+print("File path:", file_path)
+print("File exists?", os.path.exists(file_path))
+
+try:
+    model = load_model(file_path)
+    print("Model loaded successfully.")
+except Exception as e:
+    print("Error loading model:", e)
+
+
+
+
+    
 classes = ['T-shirt/Top', 'Trouser', 'Pullover', 'Dress', 'Coat', 'Sandals', 'Shirt', 'Sneaker', 'Bag', 'Ankle Boots']
 
 
